@@ -1,85 +1,122 @@
-/* General Styles */
+/* =========================
+   GLOBAL
+========================= */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #e3f2fd;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 0;
 }
 
+/* =========================
+   CONTAINER
+========================= */
 h1 {
-    color: #0d47a1;
-    margin-bottom: 20px;
-    font-size: 28px;
-    font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 28px;
+  color: #38bdf8;
 }
 
-/* Form Styling */
 form {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    text-align: left;
-    width: 90%;
-    max-width: 400px;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* =========================
+   INPUT GRID FEEL
+========================= */
 label {
-    font-weight: 600;
-    color: #333;
-    display: block;
-    margin: 10px 0 5px;
-    font-size: 16px;
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #94a3b8;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: white;
+  outline: none;
 }
 
-input[type="text"]:focus {
-    border-color: #0d47a1;
-    outline: none;
-    box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+input:focus {
+  border-color: #38bdf8;
 }
 
+/* =========================
+   BUTTON
+========================= */
 button {
-    background: linear-gradient(135deg, #0d47a1, #42a5f5);
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    width: 100%;
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0f172a;
+  transition: 0.2s ease;
 }
 
 button:hover {
-    background: linear-gradient(135deg, #42a5f5, #0d47a1);
+  background: #0ea5e9;
 }
 
-/* Prediction Styling */
+/* =========================
+   RESULT BOX
+========================= */
 h2 {
-    color: #2e7d32;
-    margin-top: 20px;
-    font-size: 24px;
-    font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  color: #f8fafc;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    form {
-        width: 100%;
-    }
-    input[type="text"], button {
-        font-size: 14px;
-    }
+h2 + button {
+  width: auto;
+  display: block;
+  margin: 20px auto;
+}
+
+/* =========================
+   AI OUTPUT BOX
+========================= */
+#aiBox {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #0b1220;
+  border-left: 4px solid #38bdf8;
+  border-radius: 10px;
+}
+
+#aiText {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  form {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
 }

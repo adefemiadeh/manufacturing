@@ -33,7 +33,7 @@ class ModelTraining:
     def train_model(self):
         try:
             self.clf = LogisticRegression(random_state=42,max_iter=1000)
-            self.clf.fit(self.X_train,self.y_train)
+            self.clf.fit(self.X_train,self.y_train) # type: ignore
 
             joblib.dump(self.clf , os.path.join(self.model_path , "model.pkl"))
 
@@ -45,12 +45,12 @@ class ModelTraining:
         
     def evaluate_model(self):
         try:
-            y_pred = self.clf.predict(self.X_test)
+            y_pred = self.clf.predict(self.X_test) # type: ignore
 
-            accuracy = accuracy_score(self.y_test,y_pred)
-            precision =  precision_score(self.y_test,y_pred , average="weighted")
-            recall =  recall_score(self.y_test,y_pred , average="weighted")
-            f1 =  f1_score(self.y_test,y_pred , average="weighted")
+            accuracy = accuracy_score(self.y_test,y_pred) # type: ignore
+            precision =  precision_score(self.y_test,y_pred , average="weighted") # type: ignore
+            recall =  recall_score(self.y_test,y_pred , average="weighted") # type: ignore
+            f1 =  f1_score(self.y_test,y_pred , average="weighted") # type: ignore
 
             logger.info(f"Accuracy : {accuracy}")
             logger.info(f"Precision Score : {precision}")

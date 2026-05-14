@@ -1,25 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width , initial-scale=1.0">
-        <link rel="stylesheet" href="static/style.css">
-        <title>Smart Manufacturing Machines Efficiency Prediction</title> 
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <body>
-        <h1>Smart Manufacturing Machines Efficiency Prediction</h1>
-        <form method="post">
-            {% for feature in features %}
-                <label for="{{ feature }}"> {{ feature }} :</label>
-                <input type="text" name="{{ feature }}" required><br>
-            {% endfor %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
 
-            <button type="submit">PREDICT</button>
-        </form>
+    <title>Smart Manufacturing AI System</title>
+  </head>
 
-        {% if prediction %}
-            <h2>Prediction : {{ prediction }}</h2>
-        {% endif %}
-    </body>
+  <body>
+    <h1>Smart Manufacturing Efficiency AI System</h1>
+
+    <form method="POST">
+      {% for feature in features %}
+      <label>{{ feature }}</label><br />
+      <input
+        type="number"
+        step="any"
+        name="{{ feature }}"
+        required
+      /><br /><br />
+      {% endfor %}
+
+      <button type="submit">Predict Efficiency</button>
+    </form>
+
+    {% if prediction %}
+    <h2>ML Prediction: {{ prediction }}</h2>
+
+    {% if prediction != "Unknown" and "Error" not in prediction %}
+    <button id="explainBtn">Explain Prediction (AI)</button>
+    {% endif %} {% endif %}
+
+    <div id="aiBox" style="display: none">
+      <h2>AI Operational Insight</h2>
+      <pre id="aiText"></pre>
+    </div>
+
+    <script>
+      const btn = document.getElementById("explainBtn");
+
+      if (btn) {
+        btn.addEventListener("click", async () => {
+          btn.innerText = "Generating...";
+          btn.disabled = true;
+
+          const prediction = "{{ prediction }}";
+
+          try {
+            const res = await fetch("/explain", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                prediction: prediction,
+              }),
+            });
+
+            const data = await res.json();
+
+            document.getElementById("aiBox").style.display = "block";
+            document.getElementById("aiText").innerText =
+              data.insight || JSON.stringify(data.error, null, 2);
+          } catch (err) {
+            document.getElementById("aiBox").style.display = "block";
+            document.getElementById("aiText").innerText = "Request failed.";
+          }
+
+          btn.innerText = "Explain Prediction (AI)";
+          btn.disabled = false;
+        });
+      }
+    </script>
+  </body>
 </html>

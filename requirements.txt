@@ -5,3 +5,5 @@ flask
 joblib
 matplotlib
 seaborn
+requests 
+python-dotenv

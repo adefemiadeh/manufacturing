@@ -29,23 +29,23 @@ class DataProcessing:
         
     def preprocess(self):
         try:
-            self.df["Timestamp"] = pd.to_datetime(self.df["Timestamp"] , errors='coerce')
+            self.df["Timestamp"] = pd.to_datetime(self.df["Timestamp"] , errors='coerce') # type: ignore
             categorical_cols = ['Operation_Mode','Efficiency_Status']
             for col in categorical_cols:
-                self.df[col] = self.df[col].astype('category')
+                self.df[col] = self.df[col].astype('category') # pyright: ignore[reportOptionalSubscript]
 
-            self.df["Year"] = self.df["Timestamp"].dt.year
-            self.df["Month"] = self.df["Timestamp"].dt.month
-            self.df["Day"] = self.df["Timestamp"].dt.day
+            self.df["Year"] = self.df["Timestamp"].dt.year # type: ignore
+            self.df["Month"] = self.df["Timestamp"].dt.month # type: ignore
+            self.df["Day"] = self.df["Timestamp"].dt.day # type: ignore
 
-            self.df["Hour"] = self.df["Timestamp"].dt.hour
+            self.df["Hour"] = self.df["Timestamp"].dt.hour # type: ignore
 
-            self.df.drop(columns=["Timestamp","Machine_ID"] , inplace=True)
+            self.df.drop(columns=["Timestamp","Machine_ID"] , inplace=True) # type: ignore
 
             columns_to_encode = ["Efficiency_Status","Operation_Mode"]
             for col in columns_to_encode:
                 le = LabelEncoder()
-                self.df[col] = le.fit_transform(self.df[col])
+                self.df[col] = le.fit_transform(self.df[col]) # type: ignore
 
             logger.info("All basic data preprocessing done..")
         
@@ -62,8 +62,8 @@ class DataProcessing:
                 'Predictive_Maintenance_Score', 'Error_Rate_%','Year', 'Month', 'Day', 'Hour'
             ]
 
-            X = self.df[self.features]
-            y = self.df["Efficiency_Status"]
+            X = self.df[self.features] # type: ignore
+            y = self.df["Efficiency_Status"] # type: ignore
 
             scaler = StandardScaler()
             X_scaled = scaler.fit_transform(X)
